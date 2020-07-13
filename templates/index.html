@@ -1,0 +1,157 @@
+{% load static %}
+{% static 'css' as base %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Welcome to Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/css/vendor.css">
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="static/js/modernizr.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="static/js/site.webmanifest">
+
+    <style>
+        .blink_me {
+            animation: blinker 1s linear infinite;
+          }
+          
+          @keyframes blinker {
+            55% {
+              opacity: 0.3;
+            }
+          }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="top" class="s-wrap site-wrapper">
+
+        <!-- site header
+        ================================================== -->
+        <header class="s-header">
+          <h1 style="color: white;">RRD's Blog</h1>
+            <nav class="header__nav-wrap">
+
+                <ul class="header__nav">
+                    <li class="current"><a href="/" title="">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="post">Post</a></li>
+                    <li><a href="accounts/logout">Logout</a></li>
+                    {% else %}
+                    <li><a href="accounts/register">Register</a></li>
+                    <li><a href="accounts/login">Login to post</a></li>
+                    {% endif %}
+                </ul> <!-- end header__nav -->
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="https://www.facebook.com/rashmiranjan.das.75286/">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="https://twitter.com/rox_rashmi">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="ss-instagram">
+                        <a href="https://www.instagram.com/_r.o.x_rashmi_/?hl=en">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav> <!-- end header__nav-wrap -->
+
+            
+
+        </header> <!-- end s-header -->
+
+        
+
+        
+
+        </div> <!-- end s-content -->
+        <div class="s-content">
+            {% if user.is_authenticated %}
+            <h1 style="color: darkgoldenrod;">Hello {{user.first_name}}</h1>
+            <b style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Now you can continue to post you blog from the left panel.</b>
+            {% endif %}
+            <h1 style="font-family: cursive;">Welcome To The Blogpage...</h1>
+            <p style="font-family: monospace;">Hello folks, Welcome to the blog site where you can post your blogs, pen down your thoughts and let the other users know about you and your thoughts.</p>
+            {% if user.is_authenticated == False %}
+            <h2 style="font-family: monospace; color: #a36100;" class="blink_me">All you have to do is to register yourself here and then login to post. Whenever a user visits he/she will be able to see your blogs.</h2>
+            {% endif %}
+             <br> <p style="font-family: monospace;">Have a good time posting your thoughts.</p>
+            <h2>Here are all the blogs that has been posted till date.</h2>
+            {% for blog in blogs %}
+               <hr>
+               <h3 style="color: darkorange;">Title : {{blog.title}}</h3>
+               <h6 style="font-family: cursive; color:darkslateblue;">Posted By :</h6><i>{{blog.author.first_name}} {{blog.author.last_name}}</i><br><br>
+               <p>{{blog.content}}</p>
+               <hr>
+            {% endfor %}
+        </div>
+
+        <!-- footer
+        ================================================== -->
+        <footer class="s-footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Rashmi Ranjan Das 2020</span> 
+                        <span>Design by <a href="https://webdesign4new.github.io/Rashmi_Ranjan_Das/homepage.html">Rashmi Ranjan Das</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
+            </div>
+        </footer>
+
+    </div> <!-- end s-wrap -->
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="static/js/jquery-3.2.1.min.js"></script>
+    <script src="static/js/plugins.js"></script>
+    <script src="static/js/main.js"></script>
+
+</body>
